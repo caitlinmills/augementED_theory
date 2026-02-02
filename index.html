@@ -41,7 +41,7 @@
         }
 
         .logo img {
-            height: 50px;
+            height: 60px;
             width: auto;
         }
 
@@ -85,7 +85,7 @@
 
         .buckets-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
 
@@ -95,7 +95,6 @@
             border-radius: 10px;
             padding: 25px;
             transition: all 0.3s ease;
-            position: relative;
             cursor: pointer;
         }
 
@@ -110,34 +109,10 @@
             cursor: default;
         }
 
-        .bucket-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(135deg, #1e4b8e 0%, #0d2238 100%);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .bucket-card[data-bucket="1"] .bucket-badge { background: linear-gradient(135deg, #1e4b8e 0%, #2a5ca8 100%); }
-        .bucket-card[data-bucket="2"] .bucket-badge { background: linear-gradient(135deg, #2563a8 0%, #3b82b8 100%); }
-        .bucket-card[data-bucket="3"] .bucket-badge { background: linear-gradient(135deg, #0d7377 0%, #14919b 100%); }
-        .bucket-card[data-bucket="4"] .bucket-badge { background: linear-gradient(135deg, #14919b 0%, #45b5aa 100%); }
-        .bucket-card[data-bucket="5"] .bucket-badge { background: linear-gradient(135deg, #3b82b8 0%, #6bb9d9 100%); }
-        .bucket-card[data-bucket="6"] .bucket-badge { background: linear-gradient(135deg, #45b5aa 0%, #6bb9d9 100%); }
-
         .bucket-icon {
             width: 48px;
             height: 48px;
             margin-bottom: 15px;
-            color: #1e4b8e;
         }
 
         .bucket-card[data-bucket="1"] .bucket-icon { color: #1e4b8e; }
@@ -151,7 +126,6 @@
             color: #1e4b8e;
             font-size: 1.15em;
             margin-bottom: 10px;
-            padding-right: 50px;
             font-weight: 500;
         }
 
@@ -159,6 +133,49 @@
             color: #555;
             font-size: 0.95em;
             line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* Listen For Preview on Cards */
+        .listen-for-preview {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e8e8e8;
+        }
+
+        .listen-for-preview h4 {
+            color: #0d7377;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .listen-for-preview ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .listen-for-preview li {
+            padding-left: 18px;
+            position: relative;
+            margin-bottom: 6px;
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .listen-for-preview li:before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: #a8d5e5;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 8px;
         }
 
         .bucket-details {
@@ -171,6 +188,10 @@
 
         .bucket-card.expanded .bucket-details {
             display: block;
+        }
+
+        .bucket-card.expanded .listen-for-preview {
+            display: none;
         }
 
         @keyframes fadeIn {
@@ -268,6 +289,7 @@
             cursor: pointer;
             font-size: 0.9em;
             margin-top: 15px;
+            margin-left: 10px;
             transition: all 0.3s ease;
         }
 
@@ -332,7 +354,7 @@
     <div class="container">
         <header>
             <div class="logo">
-                <img src="AugmentED_Logo_FullColor_wTag.png" alt="AugmentED - supported by aerdf" style="height: 60px; width: auto;">
+                <img src="AugmentED_Logo_FullColor_wTag.png" alt="AugmentED - supported by aerdf">
             </div>
             <h1>Conceptual Theory Buckets</h1>
             <p class="subtitle">Field Reference for Mapping Teacher Stories to Learning Science</p>
@@ -345,7 +367,6 @@
             <div class="buckets-grid">
                 <!-- Bucket 1 -->
                 <article class="bucket-card" data-bucket="1">
-                    <span class="bucket-badge">1</span>
                     <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="6" cy="6" r="2.5"/>
                         <circle cx="18" cy="6" r="2.5"/>
@@ -359,6 +380,15 @@
                     </svg>
                     <h3>Mental Representations & Knowledge Networks</h3>
                     <p class="core-idea-preview">Understanding depends on how ideas are connected, not how many are known.</p>
+
+                    <div class="listen-for-preview">
+                        <h4>Listen For</h4>
+                        <ul>
+                            <li>"They know the pieces but can't put it together."</li>
+                            <li>"They memorized it but don't really get it."</li>
+                            <li>"They can do it one way but can't transfer."</li>
+                        </ul>
+                    </div>
 
                     <div class="bucket-details">
                         <div class="detail-section listen-for">
@@ -385,13 +415,21 @@
 
                 <!-- Bucket 2 -->
                 <article class="bucket-card" data-bucket="2">
-                    <span class="bucket-badge">2</span>
                     <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                         <circle cx="12" cy="12" r="3"/>
                     </svg>
                     <h3>Attention, Working Memory & Cognitive Load</h3>
                     <p class="core-idea-preview">Learning is constrained by what learners attend to and can coordinate at once.</p>
+
+                    <div class="listen-for-preview">
+                        <h4>Listen For</h4>
+                        <ul>
+                            <li>"They're overwhelmed."</li>
+                            <li>"They miss the important part."</li>
+                            <li>"They focus on the wrong thing."</li>
+                        </ul>
+                    </div>
 
                     <div class="bucket-details">
                         <div class="detail-section listen-for">
@@ -418,7 +456,6 @@
 
                 <!-- Bucket 3 -->
                 <article class="bucket-card" data-bucket="3">
-                    <span class="bucket-badge">3</span>
                     <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M9 18h6"/>
                         <path d="M10 22h4"/>
@@ -426,6 +463,15 @@
                     </svg>
                     <h3>Inference, Explanation & Reasoning</h3>
                     <p class="core-idea-preview">Understanding grows through generating, testing, and revising inferences.</p>
+
+                    <div class="listen-for-preview">
+                        <h4>Listen For</h4>
+                        <ul>
+                            <li>"They wait for the answer."</li>
+                            <li>"They can't explain why."</li>
+                            <li>"Discussion stays surface-level."</li>
+                        </ul>
+                    </div>
 
                     <div class="bucket-details">
                         <div class="detail-section listen-for">
@@ -452,7 +498,6 @@
 
                 <!-- Bucket 4 -->
                 <article class="bucket-card" data-bucket="4">
-                    <span class="bucket-badge">4</span>
                     <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <circle cx="12" cy="12" r="9"/>
                         <path d="M12 7v5l3 3"/>
@@ -463,6 +508,15 @@
                     </svg>
                     <h3>Monitoring, Feedback & Self-Regulation</h3>
                     <p class="core-idea-preview">Learning improves when learners can detect and respond to gaps in understanding.</p>
+
+                    <div class="listen-for-preview">
+                        <h4>Listen For</h4>
+                        <ul>
+                            <li>"They don't use feedback."</li>
+                            <li>"They think they get it, then bomb the test."</li>
+                            <li>"They give up or keep making the same mistake."</li>
+                        </ul>
+                    </div>
 
                     <div class="bucket-details">
                         <div class="detail-section listen-for">
@@ -489,12 +543,20 @@
 
                 <!-- Bucket 5 -->
                 <article class="bucket-card" data-bucket="5">
-                    <span class="bucket-badge">5</span>
                     <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                     </svg>
                     <h3>Epistemic Stance, Affect & Identity</h3>
                     <p class="core-idea-preview">Engagement deepens when learners see uncertainty as productive rather than threatening.</p>
+
+                    <div class="listen-for-preview">
+                        <h4>Listen For</h4>
+                        <ul>
+                            <li>"They're afraid to be wrong."</li>
+                            <li>"They just want the right answer."</li>
+                            <li>"They shut down when it gets hard."</li>
+                        </ul>
+                    </div>
 
                     <div class="bucket-details">
                         <div class="detail-section listen-for">
@@ -521,7 +583,6 @@
 
                 <!-- Bucket 6 -->
                 <article class="bucket-card" data-bucket="6">
-                    <span class="bucket-badge">6</span>
                     <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                         <circle cx="9" cy="7" r="4"/>
@@ -530,6 +591,15 @@
                     </svg>
                     <h3>Collaborative Sensemaking & Distributed Cognition</h3>
                     <p class="core-idea-preview">Understanding can be built jointly when ideas are visible and taken up by others.</p>
+
+                    <div class="listen-for-preview">
+                        <h4>Listen For</h4>
+                        <ul>
+                            <li>"Group work is busy but shallow."</li>
+                            <li>"One person does all the thinking."</li>
+                            <li>"Ideas don't build on each other."</li>
+                        </ul>
+                    </div>
 
                     <div class="bucket-details">
                         <div class="detail-section listen-for">
