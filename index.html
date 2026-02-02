@@ -4,294 +4,605 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conceptual Theory Buckets | AugmentED</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e4b8e 0%, #0d2238 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        header .purpose {
+            font-size: 0.95em;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header .purpose em {
+            font-style: italic;
+            opacity: 1;
+        }
+
+        .buckets-section {
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #1e4b8e;
+            margin-bottom: 25px;
+            font-weight: 400;
+            border-left: 4px solid #14919b;
+            padding-left: 15px;
+        }
+
+        .buckets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .bucket-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bucket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(30, 75, 142, 0.15);
+            border-color: #1e4b8e;
+        }
+
+        .bucket-card.expanded {
+            grid-column: 1 / -1;
+            cursor: default;
+        }
+
+        .bucket-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #1e4b8e 0%, #0d2238 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .bucket-card[data-bucket="1"] .bucket-badge { background: linear-gradient(135deg, #1e4b8e 0%, #2a5ca8 100%); }
+        .bucket-card[data-bucket="2"] .bucket-badge { background: linear-gradient(135deg, #2563a8 0%, #3b82b8 100%); }
+        .bucket-card[data-bucket="3"] .bucket-badge { background: linear-gradient(135deg, #0d7377 0%, #14919b 100%); }
+        .bucket-card[data-bucket="4"] .bucket-badge { background: linear-gradient(135deg, #14919b 0%, #45b5aa 100%); }
+        .bucket-card[data-bucket="5"] .bucket-badge { background: linear-gradient(135deg, #3b82b8 0%, #6bb9d9 100%); }
+        .bucket-card[data-bucket="6"] .bucket-badge { background: linear-gradient(135deg, #45b5aa 0%, #6bb9d9 100%); }
+
+        .bucket-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 15px;
+            color: #1e4b8e;
+        }
+
+        .bucket-card[data-bucket="1"] .bucket-icon { color: #1e4b8e; }
+        .bucket-card[data-bucket="2"] .bucket-icon { color: #2563a8; }
+        .bucket-card[data-bucket="3"] .bucket-icon { color: #0d7377; }
+        .bucket-card[data-bucket="4"] .bucket-icon { color: #14919b; }
+        .bucket-card[data-bucket="5"] .bucket-icon { color: #3b82b8; }
+        .bucket-card[data-bucket="6"] .bucket-icon { color: #45b5aa; }
+
+        .bucket-card h3 {
+            color: #1e4b8e;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            padding-right: 50px;
+            font-weight: 500;
+        }
+
+        .bucket-card .core-idea-preview {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .bucket-details {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .bucket-card.expanded .bucket-details {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-section {
+            margin-bottom: 20px;
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-section h4 {
+            color: #0d7377;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .detail-section p {
+            color: #2c3e50;
+            font-size: 1.05em;
+            font-weight: 500;
+        }
+
+        .detail-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .detail-section li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .listen-for li {
+            font-style: italic;
+        }
+
+        .listen-for li:before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #a8d5e5;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .mechanistic li:before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border: 2px solid #14919b;
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            top: 6px;
+        }
+
+        .deep-dive-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #1e4b8e 0%, #2a5ca8 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .deep-dive-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(30, 75, 142, 0.3);
+        }
+
+        .collapse-btn {
+            display: none;
+            background: transparent;
+            border: 2px solid #e0e0e0;
+            color: #666;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .bucket-card.expanded .collapse-btn {
+            display: inline-block;
+        }
+
+        .collapse-btn:hover {
+            border-color: #1e4b8e;
+            color: #1e4b8e;
+        }
+
+        footer {
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e7ed 100%);
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .reminder {
+            color: #1e4b8e;
+            font-size: 0.95em;
+            text-align: center;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 30px 20px;
+            }
+
+            header h1 {
+                font-size: 1.6em;
+            }
+
+            .buckets-section {
+                padding: 25px 20px;
+            }
+
+            .buckets-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bucket-card.expanded {
+                grid-column: 1;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            footer {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <!-- AugmentED Logo SVG -->
-            <svg viewBox="0 0 280 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="24" cy="24" r="24" fill="#1e4b8e"/>
-                <path d="M24 8L12 36h6l2-5h8l2 5h6L24 8zm0 12l2.5 6h-5l2.5-6z" fill="white"/>
-                <circle cx="24" cy="24" r="18" stroke="white" stroke-width="2" fill="none"/>
-                <text x="60" y="32" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#1e4b8e">augment<tspan baseline-shift="super" font-size="16">^</tspan>ed</text>
-            </svg>
-        </div>
-        <h1>Conceptual Theory Buckets</h1>
-        <p class="subtitle">Field Reference for Mapping Teacher Stories to Learning Science</p>
-        <p class="purpose">Purpose: Rapid orientation during teacher stories. This page answers: <em>What kind of learning problem is this?</em></p>
-    </header>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <!-- AugmentED Logo -->
+                <svg viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 50px; width: auto;">
+                    <!-- Blue circle -->
+                    <circle cx="30" cy="30" r="28" fill="#2956A8"/>
+                    <!-- Inner circle outline -->
+                    <circle cx="30" cy="30" r="20" stroke="white" stroke-width="2.5" fill="none"/>
+                    <!-- A shape - triangle -->
+                    <path d="M30 12L18 42h6l2-5h8l2 5h6L30 12z" fill="white"/>
+                    <!-- Text: augment^ed -->
+                    <text x="70" y="38" font-family="'Segoe UI', Tahoma, sans-serif" font-size="32" font-weight="500" fill="#2956A8">augment</text>
+                    <text x="212" y="28" font-family="'Segoe UI', Tahoma, sans-serif" font-size="18" fill="#2956A8">^</text>
+                    <text x="222" y="38" font-family="'Segoe UI', Tahoma, sans-serif" font-size="32" font-weight="500" fill="#2956A8">ed</text>
+                </svg>
+            </div>
+            <h1>Conceptual Theory Buckets</h1>
+            <p class="subtitle">Field Reference for Mapping Teacher Stories to Learning Science</p>
+            <p class="purpose">Purpose: Rapid orientation during teacher stories. This page answers: <em>What kind of learning problem is this?</em></p>
+        </header>
 
-    <main class="buckets-container">
-        <!-- Bucket 1: Mental Representations -->
-        <article class="bucket" data-bucket="1">
-            <div class="bucket-header">
-                <div class="bucket-icon-wrapper">
-                    <div class="bucket-icon">
-                        <!-- Network/Nodes Icon -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="6" cy="6" r="3"/>
-                            <circle cx="18" cy="6" r="3"/>
-                            <circle cx="6" cy="18" r="3"/>
-                            <circle cx="18" cy="18" r="3"/>
-                            <line x1="9" y1="6" x2="15" y2="6"/>
-                            <line x1="6" y1="9" x2="6" y2="15"/>
-                            <line x1="18" y1="9" x2="18" y2="15"/>
-                            <line x1="9" y1="18" x2="15" y2="18"/>
-                            <line x1="9" y1="9" x2="15" y2="15"/>
-                        </svg>
+        <section class="buckets-section">
+            <h2 class="section-title">The Six Buckets</h2>
+
+            <div class="buckets-grid">
+                <!-- Bucket 1 -->
+                <article class="bucket-card" data-bucket="1">
+                    <span class="bucket-badge">1</span>
+                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="6" cy="6" r="2.5"/>
+                        <circle cx="18" cy="6" r="2.5"/>
+                        <circle cx="6" cy="18" r="2.5"/>
+                        <circle cx="18" cy="18" r="2.5"/>
+                        <line x1="8.5" y1="6" x2="15.5" y2="6"/>
+                        <line x1="6" y1="8.5" x2="6" y2="15.5"/>
+                        <line x1="18" y1="8.5" x2="18" y2="15.5"/>
+                        <line x1="8.5" y1="18" x2="15.5" y2="18"/>
+                        <line x1="8" y1="8" x2="16" y2="16"/>
+                    </svg>
+                    <h3>Mental Representations & Knowledge Networks</h3>
+                    <p class="core-idea-preview">Understanding depends on how ideas are connected, not how many are known.</p>
+
+                    <div class="bucket-details">
+                        <div class="detail-section listen-for">
+                            <h4>Listen For</h4>
+                            <ul>
+                                <li>"They know the pieces but can't put it together."</li>
+                                <li>"They memorized it but don't really get it."</li>
+                                <li>"They can do it one way but can't transfer."</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section mechanistic">
+                            <h4>Mechanistic Breakdowns</h4>
+                            <ul>
+                                <li>Fragmented schemas</li>
+                                <li>Weak causal structure</li>
+                                <li>Surface-level encoding</li>
+                                <li>Representation misalignment (text vs. diagram vs. talk)</li>
+                            </ul>
+                        </div>
+                        <a href="deep-dive-1.html" class="deep-dive-btn">Explore Deep Dive →</a>
+                        <button class="collapse-btn" onclick="event.stopPropagation()">Collapse</button>
                     </div>
-                    <span class="bucket-number">1</span>
-                </div>
-                <h2>Mental Representations & Knowledge Networks</h2>
-            </div>
-            <div class="bucket-content">
-                <div class="core-idea">
-                    <h3>Core Idea</h3>
-                    <p>Understanding depends on how ideas are connected, not how many are known.</p>
-                </div>
-                <div class="listen-for">
-                    <h3>Listen For</h3>
-                    <ul>
-                        <li>"They know the pieces but can't put it together."</li>
-                        <li>"They memorized it but don't really get it."</li>
-                        <li>"They can do it one way but can't transfer."</li>
-                    </ul>
-                </div>
-                <div class="mechanistic">
-                    <h3>Mechanistic Breakdowns</h3>
-                    <ul>
-                        <li>Fragmented schemas</li>
-                        <li>Weak causal structure</li>
-                        <li>Surface-level encoding</li>
-                        <li>Representation misalignment (text vs. diagram vs. talk)</li>
-                    </ul>
-                </div>
-                <a href="deep-dive-1.html" class="deep-dive-link">Explore Deep Dive &rarr;</a>
-            </div>
-        </article>
+                </article>
 
-        <!-- Bucket 2: Attention & Cognitive Load -->
-        <article class="bucket" data-bucket="2">
-            <div class="bucket-header">
-                <div class="bucket-icon-wrapper">
-                    <div class="bucket-icon">
-                        <!-- Eye/Focus Icon -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
+                <!-- Bucket 2 -->
+                <article class="bucket-card" data-bucket="2">
+                    <span class="bucket-badge">2</span>
+                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <h3>Attention, Working Memory & Cognitive Load</h3>
+                    <p class="core-idea-preview">Learning is constrained by what learners attend to and can coordinate at once.</p>
+
+                    <div class="bucket-details">
+                        <div class="detail-section listen-for">
+                            <h4>Listen For</h4>
+                            <ul>
+                                <li>"They're overwhelmed."</li>
+                                <li>"They miss the important part."</li>
+                                <li>"They focus on the wrong thing."</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section mechanistic">
+                            <h4>Mechanistic Breakdowns</h4>
+                            <ul>
+                                <li>Misdirected attention</li>
+                                <li>Extraneous cognitive load</li>
+                                <li>Split attention</li>
+                                <li>Prior knowledge not activated</li>
+                            </ul>
+                        </div>
+                        <a href="deep-dive-2.html" class="deep-dive-btn">Explore Deep Dive →</a>
+                        <button class="collapse-btn" onclick="event.stopPropagation()">Collapse</button>
                     </div>
-                    <span class="bucket-number">2</span>
-                </div>
-                <h2>Attention, Working Memory & Cognitive Load</h2>
-            </div>
-            <div class="bucket-content">
-                <div class="core-idea">
-                    <h3>Core Idea</h3>
-                    <p>Learning is constrained by what learners attend to and can coordinate at once.</p>
-                </div>
-                <div class="listen-for">
-                    <h3>Listen For</h3>
-                    <ul>
-                        <li>"They're overwhelmed."</li>
-                        <li>"They miss the important part."</li>
-                        <li>"They focus on the wrong thing."</li>
-                    </ul>
-                </div>
-                <div class="mechanistic">
-                    <h3>Mechanistic Breakdowns</h3>
-                    <ul>
-                        <li>Misdirected attention</li>
-                        <li>Extraneous cognitive load</li>
-                        <li>Split attention</li>
-                        <li>Prior knowledge not activated</li>
-                    </ul>
-                </div>
-                <a href="deep-dive-2.html" class="deep-dive-link">Explore Deep Dive &rarr;</a>
-            </div>
-        </article>
+                </article>
 
-        <!-- Bucket 3: Inference & Reasoning -->
-        <article class="bucket" data-bucket="3">
-            <div class="bucket-header">
-                <div class="bucket-icon-wrapper">
-                    <div class="bucket-icon">
-                        <!-- Lightbulb/Idea Icon -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 18h6"/>
-                            <path d="M10 22h4"/>
-                            <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/>
-                        </svg>
+                <!-- Bucket 3 -->
+                <article class="bucket-card" data-bucket="3">
+                    <span class="bucket-badge">3</span>
+                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 18h6"/>
+                        <path d="M10 22h4"/>
+                        <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/>
+                    </svg>
+                    <h3>Inference, Explanation & Reasoning</h3>
+                    <p class="core-idea-preview">Understanding grows through generating, testing, and revising inferences.</p>
+
+                    <div class="bucket-details">
+                        <div class="detail-section listen-for">
+                            <h4>Listen For</h4>
+                            <ul>
+                                <li>"They wait for the answer."</li>
+                                <li>"They can't explain why."</li>
+                                <li>"Discussion stays surface-level."</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section mechanistic">
+                            <h4>Mechanistic Breakdowns</h4>
+                            <ul>
+                                <li>Low inference demand</li>
+                                <li>Explanations without mechanisms</li>
+                                <li>Weak counterfactual reasoning</li>
+                                <li>No productive failure opportunities</li>
+                            </ul>
+                        </div>
+                        <a href="deep-dive-3.html" class="deep-dive-btn">Explore Deep Dive →</a>
+                        <button class="collapse-btn" onclick="event.stopPropagation()">Collapse</button>
                     </div>
-                    <span class="bucket-number">3</span>
-                </div>
-                <h2>Inference, Explanation & Reasoning</h2>
-            </div>
-            <div class="bucket-content">
-                <div class="core-idea">
-                    <h3>Core Idea</h3>
-                    <p>Understanding grows through generating, testing, and revising inferences.</p>
-                </div>
-                <div class="listen-for">
-                    <h3>Listen For</h3>
-                    <ul>
-                        <li>"They wait for the answer."</li>
-                        <li>"They can't explain why."</li>
-                        <li>"Discussion stays surface-level."</li>
-                    </ul>
-                </div>
-                <div class="mechanistic">
-                    <h3>Mechanistic Breakdowns</h3>
-                    <ul>
-                        <li>Low inference demand</li>
-                        <li>Explanations without mechanisms</li>
-                        <li>Weak counterfactual reasoning</li>
-                        <li>No productive failure opportunities</li>
-                    </ul>
-                </div>
-                <a href="deep-dive-3.html" class="deep-dive-link">Explore Deep Dive &rarr;</a>
-            </div>
-        </article>
+                </article>
 
-        <!-- Bucket 4: Monitoring & Feedback -->
-        <article class="bucket" data-bucket="4">
-            <div class="bucket-header">
-                <div class="bucket-icon-wrapper">
-                    <div class="bucket-icon">
-                        <!-- Gauge/Feedback Icon -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
-                            <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
-                            <path d="M12 2v2"/>
-                            <path d="M12 20v2"/>
-                            <path d="M20 12h2"/>
-                            <path d="M2 12h2"/>
-                            <path d="M12 12l3-3"/>
-                        </svg>
+                <!-- Bucket 4 -->
+                <article class="bucket-card" data-bucket="4">
+                    <span class="bucket-badge">4</span>
+                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3"/>
+                        <path d="M12 3v1"/>
+                        <path d="M12 20v1"/>
+                        <path d="M3 12h1"/>
+                        <path d="M20 12h1"/>
+                    </svg>
+                    <h3>Monitoring, Feedback & Self-Regulation</h3>
+                    <p class="core-idea-preview">Learning improves when learners can detect and respond to gaps in understanding.</p>
+
+                    <div class="bucket-details">
+                        <div class="detail-section listen-for">
+                            <h4>Listen For</h4>
+                            <ul>
+                                <li>"They don't use feedback."</li>
+                                <li>"They think they get it, then bomb the test."</li>
+                                <li>"They give up or keep making the same mistake."</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section mechanistic">
+                            <h4>Mechanistic Breakdowns</h4>
+                            <ul>
+                                <li>Poor metacognitive calibration</li>
+                                <li>Feedback that evaluates but doesn't inform</li>
+                                <li>No visibility into progress</li>
+                                <li>Weak error detection</li>
+                            </ul>
+                        </div>
+                        <a href="deep-dive-4.html" class="deep-dive-btn">Explore Deep Dive →</a>
+                        <button class="collapse-btn" onclick="event.stopPropagation()">Collapse</button>
                     </div>
-                    <span class="bucket-number">4</span>
-                </div>
-                <h2>Monitoring, Feedback & Self-Regulation</h2>
-            </div>
-            <div class="bucket-content">
-                <div class="core-idea">
-                    <h3>Core Idea</h3>
-                    <p>Learning improves when learners can detect and respond to gaps in understanding.</p>
-                </div>
-                <div class="listen-for">
-                    <h3>Listen For</h3>
-                    <ul>
-                        <li>"They don't use feedback."</li>
-                        <li>"They think they get it, then bomb the test."</li>
-                        <li>"They give up or keep making the same mistake."</li>
-                    </ul>
-                </div>
-                <div class="mechanistic">
-                    <h3>Mechanistic Breakdowns</h3>
-                    <ul>
-                        <li>Poor metacognitive calibration</li>
-                        <li>Feedback that evaluates but doesn't inform</li>
-                        <li>No visibility into progress</li>
-                        <li>Weak error detection</li>
-                    </ul>
-                </div>
-                <a href="deep-dive-4.html" class="deep-dive-link">Explore Deep Dive &rarr;</a>
-            </div>
-        </article>
+                </article>
 
-        <!-- Bucket 5: Epistemic Stance & Identity -->
-        <article class="bucket" data-bucket="5">
-            <div class="bucket-header">
-                <div class="bucket-icon-wrapper">
-                    <div class="bucket-icon">
-                        <!-- Heart/Mind Icon -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                            <circle cx="12" cy="12" r="2"/>
-                        </svg>
+                <!-- Bucket 5 -->
+                <article class="bucket-card" data-bucket="5">
+                    <span class="bucket-badge">5</span>
+                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    <h3>Epistemic Stance, Affect & Identity</h3>
+                    <p class="core-idea-preview">Engagement deepens when learners see uncertainty as productive rather than threatening.</p>
+
+                    <div class="bucket-details">
+                        <div class="detail-section listen-for">
+                            <h4>Listen For</h4>
+                            <ul>
+                                <li>"They're afraid to be wrong."</li>
+                                <li>"They just want the right answer."</li>
+                                <li>"They shut down when it gets hard."</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section mechanistic">
+                            <h4>Mechanistic Breakdowns</h4>
+                            <ul>
+                                <li>Fixed view of knowledge</li>
+                                <li>High epistemic risk</li>
+                                <li>Confusion interpreted as failure</li>
+                                <li>Threatened learner identity</li>
+                            </ul>
+                        </div>
+                        <a href="deep-dive-5.html" class="deep-dive-btn">Explore Deep Dive →</a>
+                        <button class="collapse-btn" onclick="event.stopPropagation()">Collapse</button>
                     </div>
-                    <span class="bucket-number">5</span>
-                </div>
-                <h2>Epistemic Stance, Affect & Identity</h2>
-            </div>
-            <div class="bucket-content">
-                <div class="core-idea">
-                    <h3>Core Idea</h3>
-                    <p>Engagement deepens when learners see uncertainty as productive rather than threatening.</p>
-                </div>
-                <div class="listen-for">
-                    <h3>Listen For</h3>
-                    <ul>
-                        <li>"They're afraid to be wrong."</li>
-                        <li>"They just want the right answer."</li>
-                        <li>"They shut down when it gets hard."</li>
-                    </ul>
-                </div>
-                <div class="mechanistic">
-                    <h3>Mechanistic Breakdowns</h3>
-                    <ul>
-                        <li>Fixed view of knowledge</li>
-                        <li>High epistemic risk</li>
-                        <li>Confusion interpreted as failure</li>
-                        <li>Threatened learner identity</li>
-                    </ul>
-                </div>
-                <a href="deep-dive-5.html" class="deep-dive-link">Explore Deep Dive &rarr;</a>
-            </div>
-        </article>
+                </article>
 
-        <!-- Bucket 6: Collaborative Sensemaking -->
-        <article class="bucket" data-bucket="6">
-            <div class="bucket-header">
-                <div class="bucket-icon-wrapper">
-                    <div class="bucket-icon">
-                        <!-- People/Collaboration Icon -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
+                <!-- Bucket 6 -->
+                <article class="bucket-card" data-bucket="6">
+                    <span class="bucket-badge">6</span>
+                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <h3>Collaborative Sensemaking & Distributed Cognition</h3>
+                    <p class="core-idea-preview">Understanding can be built jointly when ideas are visible and taken up by others.</p>
+
+                    <div class="bucket-details">
+                        <div class="detail-section listen-for">
+                            <h4>Listen For</h4>
+                            <ul>
+                                <li>"Group work is busy but shallow."</li>
+                                <li>"One person does all the thinking."</li>
+                                <li>"Ideas don't build on each other."</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section mechanistic">
+                            <h4>Mechanistic Breakdowns</h4>
+                            <ul>
+                                <li>No shared representations</li>
+                                <li>Low dialogic uptake</li>
+                                <li>Uneven participation in reasoning</li>
+                                <li>Missing transactive exchange</li>
+                            </ul>
+                        </div>
+                        <a href="deep-dive-6.html" class="deep-dive-btn">Explore Deep Dive →</a>
+                        <button class="collapse-btn" onclick="event.stopPropagation()">Collapse</button>
                     </div>
-                    <span class="bucket-number">6</span>
-                </div>
-                <h2>Collaborative Sensemaking & Distributed Cognition</h2>
+                </article>
             </div>
-            <div class="bucket-content">
-                <div class="core-idea">
-                    <h3>Core Idea</h3>
-                    <p>Understanding can be built jointly when ideas are visible and taken up by others.</p>
-                </div>
-                <div class="listen-for">
-                    <h3>Listen For</h3>
-                    <ul>
-                        <li>"Group work is busy but shallow."</li>
-                        <li>"One person does all the thinking."</li>
-                        <li>"Ideas don't build on each other."</li>
-                    </ul>
-                </div>
-                <div class="mechanistic">
-                    <h3>Mechanistic Breakdowns</h3>
-                    <ul>
-                        <li>No shared representations</li>
-                        <li>Low dialogic uptake</li>
-                        <li>Uneven participation in reasoning</li>
-                        <li>Missing transactive exchange</li>
-                    </ul>
-                </div>
-                <a href="deep-dive-6.html" class="deep-dive-link">Explore Deep Dive &rarr;</a>
-            </div>
-        </article>
-    </main>
+        </section>
 
-    <footer>
-        <p class="reminder">Remember: Most stories involve 2-3 buckets. Buckets help identify leverage points, not solutions.</p>
-    </footer>
+        <footer>
+            <p class="reminder">Remember: Most stories involve 2–3 buckets. Buckets help identify leverage points, not solutions.</p>
+        </footer>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.querySelectorAll('.bucket-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.classList.contains('deep-dive-btn')) return;
+
+                const isExpanded = this.classList.contains('expanded');
+
+                // Collapse all cards
+                document.querySelectorAll('.bucket-card.expanded').forEach(c => {
+                    c.classList.remove('expanded');
+                });
+
+                // Expand clicked card if it wasn't already expanded
+                if (!isExpanded) {
+                    this.classList.add('expanded');
+                    setTimeout(() => {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 100);
+                }
+            });
+
+            // Collapse button
+            const collapseBtn = card.querySelector('.collapse-btn');
+            if (collapseBtn) {
+                collapseBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    card.classList.remove('expanded');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
