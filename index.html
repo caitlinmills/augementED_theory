@@ -74,15 +74,6 @@
             padding: 40px;
         }
 
-        .section-title {
-            font-size: 1.5em;
-            color: #1e4b8e;
-            margin-bottom: 25px;
-            font-weight: 400;
-            border-left: 4px solid #14919b;
-            padding-left: 15px;
-        }
-
         .buckets-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -109,10 +100,17 @@
             cursor: default;
         }
 
+        .bucket-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
         .bucket-icon {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 15px;
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
         }
 
         .bucket-card[data-bucket="1"] .bucket-icon { color: #1e4b8e; }
@@ -124,9 +122,10 @@
 
         .bucket-card h3 {
             color: #1e4b8e;
-            font-size: 1.15em;
-            margin-bottom: 10px;
+            font-size: 1.1em;
+            margin: 0;
             font-weight: 500;
+            line-height: 1.3;
         }
 
         .bucket-card .core-idea-preview {
@@ -340,10 +339,6 @@
                 grid-column: 1;
             }
 
-            .section-title {
-                font-size: 1.3em;
-            }
-
             footer {
                 padding: 20px;
             }
@@ -362,23 +357,23 @@
         </header>
 
         <section class="buckets-section">
-            <h2 class="section-title">The Six Buckets</h2>
-
             <div class="buckets-grid">
                 <!-- Bucket 1 -->
                 <article class="bucket-card" data-bucket="1">
-                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="6" cy="6" r="2.5"/>
-                        <circle cx="18" cy="6" r="2.5"/>
-                        <circle cx="6" cy="18" r="2.5"/>
-                        <circle cx="18" cy="18" r="2.5"/>
-                        <line x1="8.5" y1="6" x2="15.5" y2="6"/>
-                        <line x1="6" y1="8.5" x2="6" y2="15.5"/>
-                        <line x1="18" y1="8.5" x2="18" y2="15.5"/>
-                        <line x1="8.5" y1="18" x2="15.5" y2="18"/>
-                        <line x1="8" y1="8" x2="16" y2="16"/>
-                    </svg>
-                    <h3>Mental Representations & Knowledge Networks</h3>
+                    <div class="bucket-header">
+                        <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="6" cy="6" r="2.5"/>
+                            <circle cx="18" cy="6" r="2.5"/>
+                            <circle cx="6" cy="18" r="2.5"/>
+                            <circle cx="18" cy="18" r="2.5"/>
+                            <line x1="8.5" y1="6" x2="15.5" y2="6"/>
+                            <line x1="6" y1="8.5" x2="6" y2="15.5"/>
+                            <line x1="18" y1="8.5" x2="18" y2="15.5"/>
+                            <line x1="8.5" y1="18" x2="15.5" y2="18"/>
+                            <line x1="8" y1="8" x2="16" y2="16"/>
+                        </svg>
+                        <h3>Mental Representations & Knowledge Networks</h3>
+                    </div>
                     <p class="core-idea-preview">Understanding depends on how ideas are connected, not how many are known.</p>
 
                     <div class="listen-for-preview">
@@ -415,11 +410,13 @@
 
                 <!-- Bucket 2 -->
                 <article class="bucket-card" data-bucket="2">
-                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                    </svg>
-                    <h3>Attention, Working Memory & Cognitive Load</h3>
+                    <div class="bucket-header">
+                        <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        <h3>Attention, Working Memory & Cognitive Load</h3>
+                    </div>
                     <p class="core-idea-preview">Learning is constrained by what learners attend to and can coordinate at once.</p>
 
                     <div class="listen-for-preview">
@@ -456,12 +453,14 @@
 
                 <!-- Bucket 3 -->
                 <article class="bucket-card" data-bucket="3">
-                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M9 18h6"/>
-                        <path d="M10 22h4"/>
-                        <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/>
-                    </svg>
-                    <h3>Inference, Explanation & Reasoning</h3>
+                    <div class="bucket-header">
+                        <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 18h6"/>
+                            <path d="M10 22h4"/>
+                            <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/>
+                        </svg>
+                        <h3>Inference, Explanation & Reasoning</h3>
+                    </div>
                     <p class="core-idea-preview">Understanding grows through generating, testing, and revising inferences.</p>
 
                     <div class="listen-for-preview">
@@ -498,15 +497,17 @@
 
                 <!-- Bucket 4 -->
                 <article class="bucket-card" data-bucket="4">
-                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="12" cy="12" r="9"/>
-                        <path d="M12 7v5l3 3"/>
-                        <path d="M12 3v1"/>
-                        <path d="M12 20v1"/>
-                        <path d="M3 12h1"/>
-                        <path d="M20 12h1"/>
-                    </svg>
-                    <h3>Monitoring, Feedback & Self-Regulation</h3>
+                    <div class="bucket-header">
+                        <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="9"/>
+                            <path d="M12 7v5l3 3"/>
+                            <path d="M12 3v1"/>
+                            <path d="M12 20v1"/>
+                            <path d="M3 12h1"/>
+                            <path d="M20 12h1"/>
+                        </svg>
+                        <h3>Monitoring, Feedback & Self-Regulation</h3>
+                    </div>
                     <p class="core-idea-preview">Learning improves when learners can detect and respond to gaps in understanding.</p>
 
                     <div class="listen-for-preview">
@@ -543,10 +544,12 @@
 
                 <!-- Bucket 5 -->
                 <article class="bucket-card" data-bucket="5">
-                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
-                    <h3>Epistemic Stance, Affect & Identity</h3>
+                    <div class="bucket-header">
+                        <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        <h3>Epistemic Stance, Affect & Identity</h3>
+                    </div>
                     <p class="core-idea-preview">Engagement deepens when learners see uncertainty as productive rather than threatening.</p>
 
                     <div class="listen-for-preview">
@@ -583,13 +586,15 @@
 
                 <!-- Bucket 6 -->
                 <article class="bucket-card" data-bucket="6">
-                    <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                    <h3>Collaborative Sensemaking & Distributed Cognition</h3>
+                    <div class="bucket-header">
+                        <svg class="bucket-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <h3>Collaborative Sensemaking & Distributed Cognition</h3>
+                    </div>
                     <p class="core-idea-preview">Understanding can be built jointly when ideas are visible and taken up by others.</p>
 
                     <div class="listen-for-preview">
