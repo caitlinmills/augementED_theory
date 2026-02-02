@@ -3,20 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conceptual Theory Buckets</title>
+    <title>Conceptual Theory Buckets | AugmentED</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
+        <div class="logo">
+            <!-- AugmentED Logo SVG -->
+            <svg viewBox="0 0 280 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="24" cy="24" r="24" fill="#1e4b8e"/>
+                <path d="M24 8L12 36h6l2-5h8l2 5h6L24 8zm0 12l2.5 6h-5l2.5-6z" fill="white"/>
+                <circle cx="24" cy="24" r="18" stroke="white" stroke-width="2" fill="none"/>
+                <text x="60" y="32" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#1e4b8e">augment<tspan baseline-shift="super" font-size="16">^</tspan>ed</text>
+            </svg>
+        </div>
         <h1>Conceptual Theory Buckets</h1>
         <p class="subtitle">Field Reference for Mapping Teacher Stories to Learning Science</p>
         <p class="purpose">Purpose: Rapid orientation during teacher stories. This page answers: <em>What kind of learning problem is this?</em></p>
     </header>
 
     <main class="buckets-container">
+        <!-- Bucket 1: Mental Representations -->
         <article class="bucket" data-bucket="1">
             <div class="bucket-header">
-                <span class="bucket-number">1</span>
+                <div class="bucket-icon-wrapper">
+                    <div class="bucket-icon">
+                        <!-- Network/Nodes Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="6" cy="6" r="3"/>
+                            <circle cx="18" cy="6" r="3"/>
+                            <circle cx="6" cy="18" r="3"/>
+                            <circle cx="18" cy="18" r="3"/>
+                            <line x1="9" y1="6" x2="15" y2="6"/>
+                            <line x1="6" y1="9" x2="6" y2="15"/>
+                            <line x1="18" y1="9" x2="18" y2="15"/>
+                            <line x1="9" y1="18" x2="15" y2="18"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <span class="bucket-number">1</span>
+                </div>
                 <h2>Mental Representations & Knowledge Networks</h2>
             </div>
             <div class="bucket-content">
@@ -45,9 +74,19 @@
             </div>
         </article>
 
+        <!-- Bucket 2: Attention & Cognitive Load -->
         <article class="bucket" data-bucket="2">
             <div class="bucket-header">
-                <span class="bucket-number">2</span>
+                <div class="bucket-icon-wrapper">
+                    <div class="bucket-icon">
+                        <!-- Eye/Focus Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <span class="bucket-number">2</span>
+                </div>
                 <h2>Attention, Working Memory & Cognitive Load</h2>
             </div>
             <div class="bucket-content">
@@ -76,9 +115,20 @@
             </div>
         </article>
 
+        <!-- Bucket 3: Inference & Reasoning -->
         <article class="bucket" data-bucket="3">
             <div class="bucket-header">
-                <span class="bucket-number">3</span>
+                <div class="bucket-icon-wrapper">
+                    <div class="bucket-icon">
+                        <!-- Lightbulb/Idea Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18h6"/>
+                            <path d="M10 22h4"/>
+                            <path d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2z"/>
+                        </svg>
+                    </div>
+                    <span class="bucket-number">3</span>
+                </div>
                 <h2>Inference, Explanation & Reasoning</h2>
             </div>
             <div class="bucket-content">
@@ -107,9 +157,24 @@
             </div>
         </article>
 
+        <!-- Bucket 4: Monitoring & Feedback -->
         <article class="bucket" data-bucket="4">
             <div class="bucket-header">
-                <span class="bucket-number">4</span>
+                <div class="bucket-icon-wrapper">
+                    <div class="bucket-icon">
+                        <!-- Gauge/Feedback Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
+                            <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                            <path d="M12 2v2"/>
+                            <path d="M12 20v2"/>
+                            <path d="M20 12h2"/>
+                            <path d="M2 12h2"/>
+                            <path d="M12 12l3-3"/>
+                        </svg>
+                    </div>
+                    <span class="bucket-number">4</span>
+                </div>
                 <h2>Monitoring, Feedback & Self-Regulation</h2>
             </div>
             <div class="bucket-content">
@@ -138,9 +203,19 @@
             </div>
         </article>
 
+        <!-- Bucket 5: Epistemic Stance & Identity -->
         <article class="bucket" data-bucket="5">
             <div class="bucket-header">
-                <span class="bucket-number">5</span>
+                <div class="bucket-icon-wrapper">
+                    <div class="bucket-icon">
+                        <!-- Heart/Mind Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
+                    <span class="bucket-number">5</span>
+                </div>
                 <h2>Epistemic Stance, Affect & Identity</h2>
             </div>
             <div class="bucket-content">
@@ -169,9 +244,21 @@
             </div>
         </article>
 
+        <!-- Bucket 6: Collaborative Sensemaking -->
         <article class="bucket" data-bucket="6">
             <div class="bucket-header">
-                <span class="bucket-number">6</span>
+                <div class="bucket-icon-wrapper">
+                    <div class="bucket-icon">
+                        <!-- People/Collaboration Icon -->
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <span class="bucket-number">6</span>
+                </div>
                 <h2>Collaborative Sensemaking & Distributed Cognition</h2>
             </div>
             <div class="bucket-content">
