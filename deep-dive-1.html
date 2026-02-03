@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental Representations & Knowledge Networks | AugmentED Deep Dive</title>
+    <title>Deep Dive #1: Mental Representations & Knowledge Networks | AugmentED</title>
     <style>
         * {
             margin: 0;
@@ -66,104 +66,103 @@
             letter-spacing: 0.5px;
         }
 
-        .core-idea {
-            font-size: 1.15em;
-            opacity: 0.9;
-            max-width: 700px;
-            font-style: italic;
+        .how-to-use {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-top: 20px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .how-to-use strong {
+            color: #a8d5e5;
         }
 
         .content-section {
             padding: 40px;
         }
 
-        .section-intro {
-            margin-bottom: 35px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .section-intro h2 {
-            color: #1e4b8e;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .section-intro p {
-            color: #555;
-            font-size: 1.05em;
-            max-width: 800px;
-        }
-
-        .theories-grid {
-            display: grid;
-            gap: 25px;
-        }
-
-        .theory-card {
+        /* Concept Cards */
+        .concept-card {
             background: white;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
-            padding: 30px;
+            margin-bottom: 30px;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .theory-card:hover {
+        .concept-card:hover {
             border-color: #1e4b8e;
             box-shadow: 0 5px 20px rgba(30, 75, 142, 0.1);
         }
 
-        .theory-card h3 {
+        .concept-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
+            padding: 25px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+
+        .concept-header h2 {
             color: #1e4b8e;
-            font-size: 1.25em;
+            font-size: 1.35em;
             margin-bottom: 8px;
             font-weight: 500;
         }
 
-        .theory-card .tagline {
+        .concept-header .tagline {
             color: #0d7377;
             font-size: 1em;
             font-style: italic;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e8e8e8;
         }
 
-        .theory-detail {
-            display: grid;
-            gap: 20px;
+        .concept-content {
+            padding: 30px;
         }
 
-        .theory-detail section h4 {
+        .concept-section {
+            margin-bottom: 25px;
+        }
+
+        .concept-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .concept-section h3 {
             color: #0d7377;
-            font-size: 0.85em;
+            font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: 600;
+            border-left: 3px solid #14919b;
+            padding-left: 12px;
         }
 
-        .theory-detail section p {
+        .concept-section p {
+            color: #444;
+            font-size: 0.95em;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .concept-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .concept-section li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 10px;
             color: #444;
             font-size: 0.95em;
             line-height: 1.7;
         }
 
-        .theory-detail section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .theory-detail section li {
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 8px;
-            color: #444;
-            font-size: 0.95em;
-        }
-
-        .theory-detail section li:before {
+        .concept-section li:before {
             content: "";
             width: 8px;
             height: 8px;
@@ -171,38 +170,87 @@
             border-radius: 50%;
             position: absolute;
             left: 0;
-            top: 8px;
+            top: 10px;
         }
 
-        .key-refs {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e8e8e8;
+        /* Cautions Section */
+        .cautions-section {
+            background: #fef9e7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        .key-refs h4 {
-            color: #888;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            font-weight: 600;
+        .cautions-section h3 {
+            color: #856404;
+            border-left-color: #f0ad4e;
         }
 
-        .key-refs p {
-            color: #666;
+        .caution-subsection {
+            margin-bottom: 15px;
+        }
+
+        .caution-subsection:last-child {
+            margin-bottom: 0;
+        }
+
+        .caution-subsection h4 {
+            color: #856404;
             font-size: 0.85em;
-            font-style: italic;
+            font-weight: 600;
+            margin-bottom: 8px;
         }
 
+        .caution-subsection p,
+        .caution-subsection li {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        /* Cross-Bucket Connections */
+        .cross-bucket {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e7ed 100%);
+            padding: 30px;
+            margin: 0 -40px -40px -40px;
+            border-top: 2px solid #a8d5e5;
+        }
+
+        .cross-bucket h2 {
+            color: #1e4b8e;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .cross-bucket ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cross-bucket li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .cross-bucket li:before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #14919b;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 10px;
+        }
+
+        /* Footer Navigation */
         footer {
             padding: 30px 40px;
-            background: linear-gradient(135deg, #e8f4f8 0%, #d4e7ed 100%);
-            border-top: 1px solid #e0e0e0;
-            text-align: center;
-        }
-
-        .nav-buttons {
+            background: linear-gradient(135deg, #1e4b8e 0%, #0d2238 100%);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -212,7 +260,7 @@
 
         .nav-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #1e4b8e 0%, #2a5ca8 100%);
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             padding: 12px 24px;
             border-radius: 25px;
@@ -220,22 +268,12 @@
             font-size: 0.95em;
             font-weight: 500;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(30, 75, 142, 0.3);
-        }
-
-        .nav-btn.secondary {
-            background: white;
-            color: #1e4b8e;
-            border: 2px solid #1e4b8e;
-        }
-
-        .nav-btn.secondary:hover {
-            background: #1e4b8e;
-            color: white;
         }
 
         @media (max-width: 768px) {
@@ -255,15 +293,18 @@
                 padding: 25px 20px;
             }
 
-            .theory-card {
+            .concept-header,
+            .concept-content {
+                padding: 20px;
+            }
+
+            .cross-bucket {
+                margin: 0 -20px -25px -20px;
                 padding: 20px;
             }
 
             footer {
                 padding: 20px;
-            }
-
-            .nav-buttons {
                 flex-direction: column;
             }
 
@@ -278,160 +319,302 @@
     <div class="container">
         <header>
             <a href="index.html" class="back-link">← Back to All Buckets</a>
-            <div class="bucket-label">Bucket 1</div>
+            <div class="bucket-label">Deep Dive #1</div>
             <h1>Mental Representations & Knowledge Networks</h1>
-            <p class="core-idea">Understanding depends on how ideas are connected, not how many are known.</p>
+            <div class="how-to-use">
+                <strong>How to use this page:</strong> This is a mechanism-first reference. Each concept follows: <em>Mechanism → How it shows up → What change requires → Example interventions → Cautions & limits</em>. Scan vertically to find what fits the story you're hearing.
+            </div>
         </header>
 
         <section class="content-section">
-            <div class="section-intro">
-                <h2>Why This Matters</h2>
-                <p>When teachers say students "know the pieces but can't put it together," they're describing a problem with mental representations. Knowledge isn't just stored—it's organized. The structure of that organization determines whether learners can retrieve, apply, and transfer what they know.</p>
-            </div>
+            <!-- Concept 1 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>1. Knowledge Organization & Model Building</h2>
+                    <p class="tagline">Understanding depends on how ideas are connected, not how many are known. Comprehension is the active construction of coherent mental models.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p>Two complementary frameworks ground this concept. Kintsch's Construction-Integration (CI) model distinguishes the <strong>textbase</strong> (a surface encoding of what was explicitly stated) from the <strong>situation model</strong> (an integrated representation of what the content means, connected to prior knowledge). Comprehension fails when learners build an adequate textbase but never construct a coherent situation model—they can repeat information without understanding it.</p>
+                        <p>Expertise research (Chi, Feltovich, & Glaser, 1981) shows that experts and novices differ primarily in <em>how</em> their knowledge is organized, not how much they know. Novice networks are sparse and organized around surface features ("problems with pulleys"). Expert networks are dense, hierarchical, and organized around deep principles ("conservation of energy problems").</p>
+                        <p>The mechanistic link: comprehension requires activating relevant prior knowledge and integrating new information through a constraint-satisfaction process that strengthens coherent connections. When prior knowledge is weak, poorly organized, or doesn't connect to the new material, integration fails. Retrieval and reasoning depend on spreading activation—in sparse or disorganized networks, relevant knowledge doesn't come online when needed.</p>
+                    </div>
 
-            <div class="theories-grid">
-                <article class="theory-card">
-                    <h3>Schema Theory</h3>
-                    <p class="tagline">Knowledge is organized into structured frameworks that guide understanding.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Schemas are mental structures that organize related concepts, procedures, and experiences. When learners encounter new information, they interpret it through existing schemas. Learning difficulties often arise when schemas are incomplete, fragmented, or misaligned with the domain's actual structure.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>Students can recall or recite information but can't explain why it matters or how pieces connect</li>
+                            <li>Fluent verbal performance collapses under probing questions</li>
+                            <li>Students 'get lost' mid-task because they're tracking steps, not meaning</li>
+                            <li>Minor surface changes to a problem (different numbers, different context) derail performance</li>
+                            <li>Students sort problems by surface features ('this one has a ramp') rather than deep structure</li>
+                            <li>Experts are puzzled why students 'can't see' an obvious connection</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Tasks must require situation-model-level processing, not just textbase recall. Learners need prompts that force active integration—connecting new information to prior knowledge, not just encoding it. Instruction should surface and address gaps or misorganization in prior knowledge before trying to build on it. Progress should be measured in terms of connections and organization, not just correctness on isolated items.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Self-explanation prompts</strong> (Chi et al., 1994): Students explain each step of a worked example to themselves, forcing them to connect new information to what they already know.</li>
+                            <li><strong>Coherence-building questions mid-task:</strong> Teachers pause and ask 'How does this connect to what we established earlier?' before students proceed.</li>
+                            <li><strong>Concept mapping revisited over time:</strong> Students build and revise visual representations of how ideas relate as new content is introduced.</li>
+                            <li><strong>Problem-sorting tasks</strong> (Chi et al.): Students categorize problems and discuss the basis for their categories, making organizational structure visible.</li>
+                            <li><strong>Assessments targeting relationships:</strong> Ask 'How does X relate to Y?' or 'When would you use X vs. Y?' rather than 'What is X?'</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>Students apply inappropriate schemas from everyday life to scientific concepts</li>
-                                <li>Procedures are memorized without understanding underlying structure</li>
-                                <li>Transfer fails because knowledge is tied to surface features, not deep structure</li>
+                                <li>When learners already have coherent, well-organized knowledge but disengage for motivational or affective reasons (see Bucket 5)</li>
+                                <li>When the issue is retrieval failure (knowledge exists but isn't accessed in context) rather than representation (see Transfer section below)</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Make structural relationships explicit. Use analogies carefully—they can build bridges or create misconceptions. Help learners see how new concepts relate to what they already know.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Bartlett (1932); Rumelhart (1980); Chi, Feltovich & Glaser (1981)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Pushing for integration before students have sufficient pieces to integrate—you can't connect what isn't there</li>
+                                <li>Assuming 'more connections = better' without attending to whether the connections are accurate</li>
+                                <li>Over-scaffolding integration so students never learn to do it independently</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li><strong>Whose prior knowledge?</strong> Educational materials often assume particular cultural contexts, examples, and experiences. Students whose lived experiences match the materials get to integrate; students whose don't face a double burden.</li>
+                                <li>Labeling students as having 'fragmented' or 'shallow' knowledge can slip into deficit framing. The same knowledge organization that looks 'novice-like' in school may be expert-like in other contexts.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Knowledge-in-Pieces</h3>
-                    <p class="tagline">Intuitive knowledge consists of loosely connected elements, not coherent theories.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Learners don't come to instruction with blank slates or coherent misconceptions. They have fragmented pieces of knowledge (p-prims, or phenomenological primitives) based on everyday experience. These pieces can be productively reorganized rather than simply replaced.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+            <!-- Concept 2 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>2. Knowledge-in-Pieces: Fragmentation as a Developmental Stage</h2>
+                    <p class="tagline">Inconsistency is often a normal feature of learning in progress, not a failure to be corrected.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p>diSessa's "knowledge-in-pieces" framework argues that intuitive knowledge consists of many small, context-dependent elements—phenomenological primitives or "p-prims"—rather than coherent theories. These are locally useful intuitions that get activated in specific situations.</p>
+                        <p>Learning involves gradual coordination and reorganization of these pieces, not wholesale replacement of "misconceptions." This reframes inconsistency: when a student reasons differently about structurally similar problems, it doesn't mean they "don't get it"—it means their pieces aren't yet coordinated. Conceptual change is gradual alignment and systematization, not sudden insight.</p>
+                        <p>The mechanism: p-prims are cued by context, so different surface features activate different intuitions. Coherence develops as learners notice conflicts between their intuitions and gradually systematize them into more principled knowledge. This takes time and requires encountering the same deep structure in varied contexts.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>Students contradict themselves across examples without noticing</li>
+                            <li>The same student gives different explanations for structurally identical problems in different contexts</li>
+                            <li>'Almost right' reasoning that regresses under pressure or in unfamiliar formats</li>
+                            <li>Progress looks non-monotonic—students seem to 'get worse' before getting better</li>
+                            <li>Partial explanations that are locally sensible but globally inconsistent</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Instruction must allow time and space for reconciliation rather than rushing toward coherence. Learners need opportunities to encounter the same deep structure in varied surface forms so their inconsistent intuitions come into contact. Contradictions should be surfaced productively, not suppressed. Assessment should expect and track inconsistency as a developmental stage, not just penalize it.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Contrasting cases</strong> (Schwartz & Bransford): Students see two cases side by side that share deep structure but differ on surface (or vice versa) and must identify what's the same or different.</li>
+                            <li><strong>Bridging analogies</strong> (Clement, 1993): A sequence of intermediate cases that gradually bridge from an anchoring intuition (where students reason correctly) to the target case (where they typically don't).</li>
+                            <li><strong>Predict-observe-explain sequences:</strong> Students commit to a prediction, observe what happens, and must reconcile the gap—surfacing the conflict between intuitions.</li>
+                            <li><strong>Delaying correction:</strong> Instead of immediately fixing errors, teachers surface competing ideas and let students sit with the tension before resolving.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>Students' "wrong" answers often contain productive intuitions</li>
-                                <li>The same student may give different explanations in different contexts</li>
-                                <li>Contradictions don't always trouble learners because ideas aren't yet integrated</li>
+                                <li>When misconceptions are stable, resistant, and theory-like rather than fragmented—some wrong ideas are entrenched, not just uncoordinated</li>
+                                <li>When the issue is missing knowledge entirely, not uncoordinated pieces</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Instead of confronting misconceptions head-on, find the productive pieces within student thinking. Create contexts that help learners see connections between their fragmented ideas and reorganize them into more coherent structures.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>diSessa (1993); Smith, diSessa & Roschelle (1994)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Letting students sit in confusion for too long without support, which can undermine confidence and motivation</li>
+                                <li>Treating all inconsistency as productive when sometimes it reflects genuine confusion that needs direct instruction</li>
+                                <li>Assuming students will spontaneously notice and reconcile contradictions—most need structured support</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li>Publicly surfacing students' contradictions can be embarrassing or threatening, especially for students already feeling marginalized. How contradictions are surfaced matters—private reflection vs. public exposure.</li>
+                                <li>The framing of 'fragmented' knowledge can feel like a judgment. Students may have coherent knowledge that's simply organized around different principles than school expects.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Conceptual Change</h3>
-                    <p class="tagline">Deep learning requires restructuring existing knowledge, not just adding to it.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Some learning requires fundamental reorganization of how concepts relate to each other. This is difficult because existing conceptions are functional—they work in everyday life. Conceptual change requires dissatisfaction with current ideas, an intelligible alternative, and evidence that the new conception is more fruitful.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+            <!-- Concept 3 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>3. Representational Alignment: External Forms Shape Internal Models</h2>
+                    <p class="tagline">The diagrams, symbols, and language we use don't just express understanding—they shape what understanding gets built.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p>Ainsworth's DeFT (Design, Functions, Tasks) framework analyzes how multiple external representations support learning. Key insight: external representations are not neutral windows onto content. They highlight certain relations and obscure others. A graph emphasizes different features than an equation, which emphasizes different features than a verbal description.</p>
+                        <p>Learners must learn to "read" representations, understand what each one shows and hides, and translate between them. <strong>Representational alignment</strong> refers to the match between the structure emphasized by an external representation and the conceptual structure learners need to build.</p>
+                        <p>Misalignment creates illusions of understanding: students can manipulate symbols correctly (solving equations, completing diagrams) without grasping what the symbols mean. Conversely, well-aligned representations scaffold construction of appropriate mental models by making the right relations salient.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>Procedural success without conceptual understanding—students solve equations but can't explain what the variables mean</li>
+                            <li>Students copy diagrams but don't use them when problem-solving</li>
+                            <li>Confusion or errors when switching between representations (graph to equation, diagram to verbal)</li>
+                            <li>Decorative representations that don't connect to the core ideas</li>
+                            <li>Students who can manipulate a representation but can't interpret it or explain what it shows</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Representations must be chosen deliberately to align with target conceptual structure—not just to look nice or because they're conventional. Learners need explicit support to translate between representations and understand what each one affords. Instruction should treat representations as tools with strengths and limits, not transparent windows onto truth.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Translation tasks:</strong> Students express the same idea in multiple representations—diagram, equation, verbal—and explain how each connects to the others.</li>
+                            <li><strong>Representation analysis prompts:</strong> 'What does this diagram show? What does it hide? What couldn't you figure out from this alone?'</li>
+                            <li><strong>Stripping seductive details</strong> (Harp & Mayer): Removing interesting but irrelevant illustrations that capture attention without supporting understanding.</li>
+                            <li><strong>Progressive formalization:</strong> Starting with intuitive representations close to the phenomenon, then gradually introducing more abstract/formal representations as understanding develops.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>Students resist ideas that conflict with deeply held intuitions</li>
-                                <li>Surface-level understanding can mask unchanged underlying conceptions</li>
-                                <li>New vocabulary gets mapped onto old conceptual structures</li>
+                                <li>When students understand the representations fine but lack motivation or self-regulation to use them</li>
+                                <li>When the issue is missing domain knowledge, not representational competence</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Create cognitive conflict that makes limitations of current thinking visible. Provide intelligible alternatives and opportunities to see why new frameworks are more powerful. This takes time—conceptual change is gradual, not instantaneous.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Posner, Strike, Hewson & Gertzog (1982); Vosniadou (2013); Chi (2008)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Overwhelming students with multiple representations before they've mastered any one</li>
+                                <li>Assuming translation between representations is easy or automatic—it's a skill that needs to be taught</li>
+                                <li>Removing 'seductive details' that actually do serve motivational or cultural purposes for some learners</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li><strong>Whose representations count as 'standard' or 'clear'?</strong> Diagramming conventions, mathematical notations, and even what counts as a 'good' explanation are culturally situated. Students from different backgrounds may find different representations intuitive.</li>
+                                <li>Privileging formal/abstract representations over intuitive/concrete ones can devalue the knowledge students bring.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Expertise & Knowledge Organization</h3>
-                    <p class="tagline">Experts organize knowledge around deep principles; novices around surface features.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>The difference between experts and novices isn't just how much they know, but how that knowledge is organized. Experts chunk information around deep structural principles, making retrieval and application more efficient. They see patterns where novices see isolated facts.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+            <!-- Concept 4 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>4. Transfer: Recognizing Deep Similarity Across Contexts</h2>
+                    <p class="tagline">Transfer depends on encoding and retrieving structure—not memorizing answers.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p>Gentner's structure-mapping theory explains analogical reasoning: learners must extract relational structure from a source case and map it onto a target. Transfer fails when learners encode cases in terms of surface features (objects, contexts, cover stories) rather than relational structure (how elements interact, what causes what).</p>
+                        <p>This explains "inert knowledge"—students learn something in one context but fail to apply it elsewhere. The knowledge exists, but retrieval is cued by surface features that don't match the new situation. The deep structural similarity isn't noticed.</p>
+                        <p>Transfer thus requires two things: (1) encoding structure during initial learning, not just surface features, and (2) recognizing structural alignment at retrieval, even when surfaces differ. Both are hard and neither is automatic.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>'They already learned this!' failures—teachers know students have the relevant knowledge but students don't access it</li>
+                            <li>Strong performance on practiced problems, collapse on transfer assessments or novel contexts</li>
+                            <li>Learning in one class or unit doesn't transfer to another</li>
+                            <li>Students don't spontaneously use relevant prior knowledge unless explicitly cued</li>
+                            <li>Context-bound competence that doesn't travel</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Initial learning must emphasize relational structure, not just procedures or facts. Practice should vary surface features while preserving deep structure, so learners extract what's invariant. Instruction should explicitly support retrieval cues based on structure ("This is like the X problem—what's the same?"), not just context.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Comparison of solved examples</strong> (Rittle-Johnson & Star): Students compare two worked solutions side by side and identify similarities/differences. Cases are chosen to highlight structural features.</li>
+                            <li><strong>Varied practice across surface contexts:</strong> Instead of massed practice on identical problems, learners encounter the same principle in multiple surface forms.</li>
+                            <li><strong>Explicit structural cueing at retrieval:</strong> 'This is like the [anchor problem] we solved before—what's the same? What's different?'</li>
+                            <li><strong>Analogical encoding</strong> (Gentner): Comparing two analogous cases during learning, which promotes extraction of shared structure.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>Novices sort problems by surface features (pulleys, inclined planes)</li>
-                                <li>Experts sort by underlying principles (conservation of energy)</li>
-                                <li>Expert knowledge is more interconnected and hierarchically organized</li>
+                                <li>When basic comprehension hasn't formed yet—you can't transfer what you don't understand</li>
+                                <li>When the knowledge is there and structurally encoded, but affective factors (anxiety, identity threat) block access</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Help learners see deep structure, not just surface features. Use comparison and contrast to highlight structural similarities. Make expert organization visible through worked examples and think-alouds.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Chi, Feltovich & Glaser (1981); Bransford, Brown & Cocking (2000)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Varying surfaces too early, before students have a solid grasp of even one instantiation</li>
+                                <li>Assuming structural similarity is obvious—it's often only obvious to experts who already see the structure</li>
+                                <li>Teaching for transfer without ensuring initial learning is solid</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li>What counts as 'deep structure' vs. 'surface feature' isn't always neutral. Features that seem superficial in school contexts may carry real meaning in students' lives and communities.</li>
+                                <li>Transfer expectations can be inequitable when they assume students have encountered the relevant structures in prior schooling—students with interrupted education may have the capacity but lack the specific structural exposure.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Multiple Representations</h3>
-                    <p class="tagline">Understanding deepens when learners connect different ways of representing the same idea.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Concepts can be represented in multiple forms: verbal, visual, symbolic, gestural. Each representation highlights different aspects and has different affordances. Deep understanding involves connecting representations—seeing how a graph relates to an equation relates to a physical situation.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
-                            <ul>
-                                <li>Students can work with one representation but not translate to another</li>
-                                <li>Diagrams are treated as pictures rather than encoding relationships</li>
-                                <li>Symbol manipulation occurs without connection to meaning</li>
-                            </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Explicitly teach how representations connect. Don't assume translation is automatic. Use dynamic linked representations where changing one updates others. Have learners generate representations, not just interpret them.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Ainsworth (2006); Kozma (2003); Nathan (2012)</p>
-                        </div>
-                    </div>
-                </article>
+            <!-- Cross-Bucket Connections -->
+            <div class="cross-bucket">
+                <h2>Cross-Bucket Connections</h2>
+                <ul>
+                    <li><strong>Representation issues often co-occur with inference problems (Bucket 3):</strong> students may have organized knowledge but not generate inferences from it.</li>
+                    <li><strong>When students have the knowledge but don't use it,</strong> consider monitoring/regulation (Bucket 4) or epistemic stance/affect (Bucket 5).</li>
+                    <li><strong>If individual understanding is fine but group work isn't productive,</strong> see collaborative sensemaking (Bucket 6).</li>
+                </ul>
             </div>
         </section>
 
         <footer>
-            <div class="nav-buttons">
-                <a href="index.html" class="nav-btn secondary">← Back to Buckets</a>
-                <a href="deep-dive-2.html" class="nav-btn">Next: Attention & Working Memory →</a>
-            </div>
+            <a href="index.html" class="nav-btn">← Back to Buckets</a>
+            <a href="deep-dive-2.html" class="nav-btn">Next: Attention & Working Memory →</a>
         </footer>
     </div>
 </body>

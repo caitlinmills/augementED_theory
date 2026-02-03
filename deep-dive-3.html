@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inference, Explanation & Reasoning | AugmentED Deep Dive</title>
+    <title>Deep Dive #3: Inference, Explanation & Reasoning | AugmentED</title>
     <style>
         * {
             margin: 0;
@@ -66,104 +66,101 @@
             letter-spacing: 0.5px;
         }
 
-        .core-idea {
-            font-size: 1.15em;
-            opacity: 0.9;
-            max-width: 700px;
-            font-style: italic;
+        .how-to-use {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-top: 20px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .how-to-use strong {
+            color: #a8d5e5;
         }
 
         .content-section {
             padding: 40px;
         }
 
-        .section-intro {
-            margin-bottom: 35px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .section-intro h2 {
-            color: #1e4b8e;
-            font-size: 1.4em;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .section-intro p {
-            color: #555;
-            font-size: 1.05em;
-            max-width: 800px;
-        }
-
-        .theories-grid {
-            display: grid;
-            gap: 25px;
-        }
-
-        .theory-card {
+        .concept-card {
             background: white;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
-            padding: 30px;
+            margin-bottom: 30px;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        .theory-card:hover {
+        .concept-card:hover {
             border-color: #1e4b8e;
             box-shadow: 0 5px 20px rgba(30, 75, 142, 0.1);
         }
 
-        .theory-card h3 {
+        .concept-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #e8f4f8 100%);
+            padding: 25px 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .concept-header h2 {
             color: #1e4b8e;
-            font-size: 1.25em;
+            font-size: 1.35em;
             margin-bottom: 8px;
             font-weight: 500;
         }
 
-        .theory-card .tagline {
+        .concept-header .tagline {
             color: #0d7377;
             font-size: 1em;
             font-style: italic;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e8e8e8;
         }
 
-        .theory-detail {
-            display: grid;
-            gap: 20px;
+        .concept-content {
+            padding: 30px;
         }
 
-        .theory-detail section h4 {
+        .concept-section {
+            margin-bottom: 25px;
+        }
+
+        .concept-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .concept-section h3 {
             color: #0d7377;
-            font-size: 0.85em;
+            font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: 600;
+            border-left: 3px solid #14919b;
+            padding-left: 12px;
         }
 
-        .theory-detail section p {
+        .concept-section p {
+            color: #444;
+            font-size: 0.95em;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .concept-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .concept-section li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 10px;
             color: #444;
             font-size: 0.95em;
             line-height: 1.7;
         }
 
-        .theory-detail section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .theory-detail section li {
-            padding-left: 20px;
-            position: relative;
-            margin-bottom: 8px;
-            color: #444;
-            font-size: 0.95em;
-        }
-
-        .theory-detail section li:before {
+        .concept-section li:before {
             content: "";
             width: 8px;
             height: 8px;
@@ -171,38 +168,84 @@
             border-radius: 50%;
             position: absolute;
             left: 0;
-            top: 8px;
+            top: 10px;
         }
 
-        .key-refs {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e8e8e8;
+        .cautions-section {
+            background: #fef9e7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
         }
 
-        .key-refs h4 {
-            color: #888;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-            font-weight: 600;
+        .cautions-section h3 {
+            color: #856404;
+            border-left-color: #f0ad4e;
         }
 
-        .key-refs p {
-            color: #666;
+        .caution-subsection {
+            margin-bottom: 15px;
+        }
+
+        .caution-subsection:last-child {
+            margin-bottom: 0;
+        }
+
+        .caution-subsection h4 {
+            color: #856404;
             font-size: 0.85em;
-            font-style: italic;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .caution-subsection p,
+        .caution-subsection li {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .cross-bucket {
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e7ed 100%);
+            padding: 30px;
+            margin: 0 -40px -40px -40px;
+            border-top: 2px solid #a8d5e5;
+        }
+
+        .cross-bucket h2 {
+            color: #1e4b8e;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .cross-bucket ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .cross-bucket li {
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 10px;
+            color: #444;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .cross-bucket li:before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            background: #14919b;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 10px;
         }
 
         footer {
             padding: 30px 40px;
-            background: linear-gradient(135deg, #e8f4f8 0%, #d4e7ed 100%);
-            border-top: 1px solid #e0e0e0;
-            text-align: center;
-        }
-
-        .nav-buttons {
+            background: linear-gradient(135deg, #1e4b8e 0%, #0d2238 100%);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -212,7 +255,7 @@
 
         .nav-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #1e4b8e 0%, #2a5ca8 100%);
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             padding: 12px 24px;
             border-radius: 25px;
@@ -220,22 +263,12 @@
             font-size: 0.95em;
             font-weight: 500;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(30, 75, 142, 0.3);
-        }
-
-        .nav-btn.secondary {
-            background: white;
-            color: #1e4b8e;
-            border: 2px solid #1e4b8e;
-        }
-
-        .nav-btn.secondary:hover {
-            background: #1e4b8e;
-            color: white;
         }
 
         @media (max-width: 768px) {
@@ -255,15 +288,18 @@
                 padding: 25px 20px;
             }
 
-            .theory-card {
+            .concept-header,
+            .concept-content {
+                padding: 20px;
+            }
+
+            .cross-bucket {
+                margin: 0 -20px -25px -20px;
                 padding: 20px;
             }
 
             footer {
                 padding: 20px;
-            }
-
-            .nav-buttons {
                 flex-direction: column;
             }
 
@@ -278,160 +314,312 @@
     <div class="container">
         <header>
             <a href="index.html" class="back-link">← Back to All Buckets</a>
-            <div class="bucket-label">Bucket 3</div>
+            <div class="bucket-label">Deep Dive #3</div>
             <h1>Inference, Explanation & Reasoning</h1>
-            <p class="core-idea">Understanding grows through generating, testing, and revising inferences.</p>
+            <div class="how-to-use">
+                <strong>How to use this page:</strong> This is a mechanism-first reference. Each concept follows: <em>Mechanism → How it shows up → What change requires → Example interventions → Cautions & limits</em>. Scan vertically to find what fits the story you're hearing.
+            </div>
         </header>
 
         <section class="content-section">
-            <div class="section-intro">
-                <h2>Why This Matters</h2>
-                <p>When teachers say students "wait for the answer" or "can't explain why," they're describing a lack of active reasoning. Learning isn't just receiving information—it's constructing meaning through inference and explanation. Without opportunities to reason, understanding stays shallow.</p>
-            </div>
+            <!-- Concept 1 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>1. Inference & Coherence Building</h2>
+                    <p class="tagline">Understanding requires going beyond what's explicitly stated—filling gaps, connecting ideas, and building coherence.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p>Comprehension involves generating inferences that connect ideas and fill gaps in what's explicitly presented. Some inferences happen automatically during processing (<strong>bridging inferences</strong> that maintain local coherence—connecting pronouns to referents, linking sentences causally). Others require deliberate effort (<strong>elaborative inferences</strong> that enrich understanding by connecting to prior knowledge or drawing implications).</p>
+                        <p>The distinction matters for design. Graesser and colleagues distinguish inference types by whether they're generated online (during reading) or require prompting. Skilled comprehenders generate more inferences spontaneously; less skilled comprehenders often need support.</p>
+                        <p>Text cohesion—the explicit marking of connections—interacts with prior knowledge in important ways (McNamara). High cohesion supports low-knowledge readers by making connections explicit. But for high-knowledge readers, lower cohesion can actually improve learning by forcing active inference generation (the "reverse cohesion effect"). Gaps that would derail a novice become productive opportunities for someone with sufficient background.</p>
+                    </div>
 
-            <div class="theories-grid">
-                <article class="theory-card">
-                    <h3>Self-Explanation</h3>
-                    <p class="tagline">Explaining to yourself forces integration and reveals gaps.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>When learners explain material to themselves—articulating why steps work, how ideas connect, what principles apply—they engage in generative processing that builds understanding. Self-explanation makes thinking visible to the learner, exposing gaps and misconceptions that passive reading hides.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>Students recall what was stated but miss implications or connections</li>
+                            <li>Comprehension breaks down at transition points where inferences are required</li>
+                            <li>Students with strong background knowledge handle challenging texts better than expected</li>
+                            <li>Explicitly connecting ideas helps struggling readers but may not help (or may even hurt) stronger ones</li>
+                            <li>Students can answer literal questions but struggle with inferential ones</li>
+                            <li>Understanding is shallow—students miss the 'so what'</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Support inference generation, not just information delivery. For low-knowledge learners, provide cohesion and scaffolding. For higher-knowledge learners, consider whether gaps might prompt productive inference. Teach learners to recognize when they need to generate connections. Make inferential demands visible rather than assuming they'll happen automatically.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Elaborative interrogation</strong> (Pressley): Prompting learners to ask 'why' and 'how' questions that require connecting new information to prior knowledge.</li>
+                            <li><strong>Cohesion manipulation:</strong> Adjusting text cohesion based on learner knowledge—more explicit connections for novices, strategic gaps for those with background.</li>
+                            <li><strong>Inference prompts:</strong> Explicit questions that require going beyond what's stated ('What does this imply about...?', 'Why might this be the case?').</li>
+                            <li><strong>Graphic organizers</strong> that make structural relationships visible, supporting inference about how ideas connect.</li>
+                            <li><strong>Think-alouds</strong> modeling inferential processing: Making visible the inferences skilled readers generate spontaneously.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>Students read worked examples without explaining each step</li>
-                                <li>Correct answers are accepted without asking "how do you know?"</li>
-                                <li>Procedures are followed without understanding why they work</li>
+                                <li>When learners lack the prior knowledge needed to generate inferences—you can't connect to what isn't there (see Bucket 1)</li>
+                                <li>When the issue is attention or working memory rather than inference generation (see Bucket 2)</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Prompt learners to explain steps, not just execute them. Use incomplete examples that require inference. Build in prompts that ask "why" and "how" throughout learning materials.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Chi et al. (1989); Chi (2000); Renkl (1997)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Creating gaps for learners who don't have the background to bridge them—productive difficulty becomes unproductive confusion</li>
+                                <li>Over-prompting inferences so learners don't develop independent inference habits</li>
+                                <li>Assuming inference failure is a skill deficit when it may be a knowledge deficit</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li>Texts and materials are often written with implicit assumptions about shared background knowledge. Students whose backgrounds differ from the assumed reader face heavier inference burdens—not because they can't infer, but because they're expected to bridge larger gaps.</li>
+                                <li>Labeling students as 'poor inferrers' can obscure that inference depends on knowledge. The same student may infer brilliantly in familiar domains.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Productive Failure</h3>
-                    <p class="tagline">Struggling before instruction prepares the mind for learning.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Having learners attempt problems before receiving instruction—even when they fail—activates prior knowledge, reveals the limits of current understanding, and creates "knowledge gaps" that make subsequent instruction meaningful. The failure must be productive: designed to surface key features of the domain.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+            <!-- Concept 2 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>2. Grounding, Simulation & Causal Understanding</h2>
+                    <p class="tagline">Deep understanding involves mentally simulating how things work, grounded in embodied experience with the world.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p>Understanding isn't just manipulating abstract symbols—it's grounded in perception, action, and experience (Barsalou, Glenberg). When we comprehend, we construct situation models that draw on sensorimotor representations. Understanding a sentence about throwing a ball involves activating motor representations; understanding a story involves simulating the spatial and causal structure of the narrated world.</p>
+                        <p>This grounding supports causal and mechanistic reasoning. When learners understand <em>how</em> something works (not just <em>that</em> it works), they can predict, explain, and troubleshoot. Mechanistic understanding involves representing the components of a system, their organization, and the causal processes by which they produce outcomes (Russ et al.). This goes beyond associative knowledge (X goes with Y) to explanatory knowledge (X causes Y because...).</p>
+                        <p>Mental simulation enables inference: you can "run" your mental model to see what would happen, trace causal chains, and identify what would need to change to produce different outcomes. Experts in a domain have rich simulation capacity; novices often lack the grounded experience to simulate effectively.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>Students can state facts but can't explain how or why something works</li>
+                            <li>Students memorize procedures without understanding the underlying mechanism</li>
+                            <li>Predictions and troubleshooting are weak—students can't reason through 'what if' scenarios</li>
+                            <li>Abstract concepts remain disconnected from concrete experience</li>
+                            <li>Students struggle with content that's far from their lived experience</li>
+                            <li>Understanding is brittle—students can't adapt when conditions change</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Ground abstract concepts in concrete experience. Support the construction of mental models that can be simulated. Emphasize mechanistic understanding—how components interact to produce outcomes. Provide opportunities to predict, explain, and troubleshoot, not just recall. Connect new content to embodied experience when possible.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Concrete analogies and examples before abstract principles:</strong> Ground new concepts in familiar, embodied experience.</li>
+                            <li><strong>Mechanistic explanation prompts:</strong> 'How does this work?', 'What's happening at each step?', 'Why does changing X affect Y?'</li>
+                            <li><strong>Prediction and simulation tasks:</strong> Have learners predict outcomes before observing them, forcing them to run their mental models.</li>
+                            <li><strong>Physical and virtual manipulatives:</strong> Direct interaction that builds sensorimotor grounding for abstract concepts.</li>
+                            <li><strong>Contrasting cases that isolate causal variables:</strong> Seeing what changes (and doesn't) when specific factors vary builds mechanistic understanding.</li>
+                            <li><strong>Troubleshooting tasks:</strong> 'Why isn't this working?' requires tracing causal chains.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>All instruction is front-loaded before any practice</li>
-                                <li>Struggle is seen as a sign of poor teaching, not a learning opportunity</li>
-                                <li>Problems are designed to be solvable, not to reveal conceptual territory</li>
+                                <li>When the domain is genuinely abstract and grounding in physical experience is forced or misleading</li>
+                                <li>When learners already have strong mechanistic understanding and need to work at more abstract levels</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Design problems that expose key features even when solutions fail. Follow struggle with explicit instruction that addresses what was discovered. Create safe contexts where failure is expected and valued.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Kapur (2008, 2016); Kapur & Bielaczyc (2012)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Assuming all concepts can or should be grounded in physical experience—some abstractions are genuinely abstract</li>
+                                <li>Concrete examples that introduce misconceptions or don't map cleanly to the target concept</li>
+                                <li>Over-reliance on one grounding context that limits transfer</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li>Whose embodied experiences are treated as the 'natural' grounding? Students from different backgrounds may have different experiential bases. What's intuitive grounding for one group may be unfamiliar to another.</li>
+                                <li>Access to rich hands-on experiences (labs, manipulatives, field experiences) is inequitably distributed. Students without those experiences may appear to lack understanding when they lack grounding opportunities.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Analogical Reasoning</h3>
-                    <p class="tagline">Comparing cases reveals deep structure that single examples hide.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Comparing and contrasting cases helps learners abstract underlying principles that transcend surface features. Good analogies map structural relationships from a familiar domain to a new one. However, analogies can mislead when surface similarities suggest false structural parallels.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+            <!-- Concept 3 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>3. Depth of Processing</h2>
+                    <p class="tagline">Learning depends on how information is processed—deeper, more generative engagement produces more durable understanding.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p>Craik and Lockhart's levels of processing framework established that memory and understanding depend on the <em>depth</em> of processing during encoding—not just time spent, but the nature of the cognitive engagement. Shallow processing (attending to surface features) produces weak, transient traces. Deep processing (attending to meaning, making connections, generating elaborations) produces durable, transferable understanding.</p>
+                        <p><strong>Generation is key:</strong> producing rather than receiving information typically yields better learning (the generation effect). Explaining, predicting, connecting, questioning—these generative activities engage deeper processing than reading, listening, or reviewing. Even generating wrong answers can be beneficial if followed by feedback (as in productive failure).</p>
+                        <p>This framework shifts the question from "Did students get the information?" to "How did students process the information?" Two learners can receive identical instruction and emerge with vastly different understanding depending on what they did cognitively during learning.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>Students spend time with material but learning is shallow—they recognize but can't recall, recall but can't apply</li>
+                            <li>Passive engagement: students listen, copy, highlight, but don't transform or generate</li>
+                            <li>Re-reading or reviewing feels productive but doesn't improve understanding</li>
+                            <li>Students who 'explain it back' or teach others learn more than those who just receive</li>
+                            <li>Testing and retrieval practice outperforms additional study time</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Design for generative engagement, not just information exposure. Have learners produce, explain, connect, question—not just receive. Recognize that apparent 'engagement' (time on task, attention) doesn't guarantee deep processing. Create conditions that require meaning-based processing rather than surface processing.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Retrieval practice:</strong> Having learners generate information from memory rather than re-reading—even without feedback, retrieval deepens processing.</li>
+                            <li><strong>Elaborative interrogation:</strong> 'Why' questions that force learners to connect new information to prior knowledge.</li>
+                            <li><strong>Summarization and self-explanation:</strong> Generating condensed versions or explaining reasoning requires deep processing.</li>
+                            <li><strong>Peer teaching:</strong> Preparing to teach or actually teaching requires organizing and generating.</li>
+                            <li><strong>Concept mapping:</strong> Creating representations of relationships forces processing of connections, not just nodes.</li>
+                            <li><strong>Prediction before instruction:</strong> Generating predictions (even wrong ones) primes deeper processing of subsequent information.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>Single examples are used without comparison cases</li>
-                                <li>Analogies highlight surface similarities but miss structural differences</li>
-                                <li>Learners don't see how cases that look different are structurally similar</li>
+                                <li>When learners lack the knowledge base to engage generatively—generation without sufficient foundation can produce frustration or misconceptions</li>
+                                <li>When the goal is temporary retention of arbitrary information where deep processing isn't needed</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Use comparison with cases that share deep structure but differ on the surface. Explicitly map relationships, not just features. Ask what's similar and what's different. Help learners see the limits of analogies.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Gentner (1983); Gick & Holyoak (1983); Alfieri, Nokes-Malach & Schunn (2013)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Assuming all generation is equally beneficial—poorly designed generation tasks can waste time or reinforce errors</li>
+                                <li>Making everything effortful when some content just needs to be received before it can be processed deeply</li>
+                                <li>Conflating observable activity with deep processing—busy engagement isn't automatically deep engagement</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li>Deep processing requires cognitive resources. Students who are stressed, distracted by out-of-school concerns, or fatigued may struggle to engage deeply—not for lack of ability but lack of available resources.</li>
+                                <li>Generative tasks can be more exposing than receptive tasks. Students may avoid generation to avoid revealing gaps, especially in environments that feel evaluative or unsafe.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Mechanistic Reasoning</h3>
-                    <p class="tagline">Understanding how something works means tracing cause through mechanism.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Deep understanding involves constructing mental models of mechanisms—how components interact to produce phenomena. Mechanistic explanations trace causal chains: what happens, to what, and how each step enables the next. Without mechanisms, learners have descriptions but not explanations.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
+            <!-- Concept 4 -->
+            <article class="concept-card">
+                <div class="concept-header">
+                    <h2>4. Productive Difficulty</h2>
+                    <p class="tagline">Struggle and difficulty can strengthen learning—when they're the right kind of difficulty at the right time.</p>
+                </div>
+                <div class="concept-content">
+                    <div class="concept-section">
+                        <h3>The Mechanism</h3>
+                        <p><strong>Desirable difficulties</strong> (Bjork) are challenges that slow initial acquisition but enhance long-term retention and transfer. Spacing practice over time, interleaving different problem types, varying conditions, and testing rather than restudying—all make learning harder in the moment but more durable.</p>
+                        <p><strong>Productive failure</strong> (Kapur) extends this to problem-solving: having learners struggle with problems before receiving instruction can be more effective than direct instruction followed by practice. The struggle activates prior knowledge, reveals its limits, and creates a need for the new material—even though learners often fail during the initial phase.</p>
+                        <p>The mechanism: difficulty that requires deeper processing or more effortful retrieval strengthens memory traces and builds more flexible representations. Easy, fluent processing can create illusions of learning—performance feels good but doesn't last.</p>
+                        <p>The key word is 'productive.' Not all difficulty helps. Difficulty is productive when it induces beneficial processing; it's unproductive when it causes confusion, frustration, or disengagement without cognitive benefit.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>How It Shows Up</h3>
+                        <ul>
+                            <li>Students who struggle during learning outperform those who had easier initial learning—on delayed tests</li>
+                            <li>Fluent, easy learning produces confidence but not retention</li>
+                            <li>Students resist effortful strategies that feel less effective in the moment</li>
+                            <li>Interleaved or varied practice feels harder but transfers better than blocked practice</li>
+                            <li>Students who generate (wrong) predictions before instruction learn more from the instruction</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>What Change Requires</h3>
+                        <p>Introduce difficulty that induces deeper processing—spacing, interleaving, retrieval practice, generation before instruction. Help learners understand that ease isn't the goal; fluency during learning can be misleading. Distinguish productive struggle from unproductive confusion. Manage the affective challenge: difficulty is only productive if learners persist through it.</p>
+                    </div>
+
+                    <div class="concept-section">
+                        <h3>Example Interventions</h3>
+                        <ul>
+                            <li><strong>Spacing and distributed practice:</strong> Spreading learning over time rather than massing it.</li>
+                            <li><strong>Interleaving:</strong> Mixing problem types rather than blocking by type.</li>
+                            <li><strong>Retrieval practice:</strong> Testing as a learning event, not just assessment.</li>
+                            <li><strong>Productive failure:</strong> Having learners attempt problems before receiving instruction on how to solve them.</li>
+                            <li><strong>Generation with feedback:</strong> Having learners generate answers (even if wrong) before receiving correct information.</li>
+                            <li><strong>Reducing scaffolding over time:</strong> Gradually removing supports to maintain appropriate difficulty.</li>
+                        </ul>
+                    </div>
+
+                    <div class="cautions-section">
+                        <h3>Cautions & Limits</h3>
+                        <div class="caution-subsection">
+                            <h4>When this lens doesn't apply:</h4>
                             <ul>
-                                <li>Students describe what happens without explaining how or why</li>
-                                <li>Explanations skip steps in the causal chain</li>
-                                <li>Abstract principles are stated without grounding in mechanism</li>
+                                <li>When learners lack the foundational knowledge to engage productively with difficulty—struggle without any relevant knowledge is just frustration</li>
+                                <li>When affective conditions don't support persistence—difficulty is only productive if learners keep going</li>
                             </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Ask for mechanism, not just description. Use prompts like "what makes that happen?" and "what would change if...?" Make causal structure visible through diagrams and animations that show component interactions.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Machamer, Darden & Craver (2000); Russ et al. (2008); Keil (2006)</p>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ways this could go wrong:</h4>
+                            <ul>
+                                <li>Difficulty for difficulty's sake—challenge that doesn't induce beneficial processing is just hard, not helpful</li>
+                                <li>Ignoring the affective dimension: productive failure requires a context where failure feels safe enough to persist</li>
+                                <li>Applying desirable difficulties without considering learner readiness—the same difficulty can be productive or destructive depending on preparation</li>
+                            </ul>
+                        </div>
+                        <div class="caution-subsection">
+                            <h4>Ethical considerations:</h4>
+                            <ul>
+                                <li><strong>Who gets to struggle productively and who just fails?</strong> Students with stronger foundations and more supportive environments are better positioned to benefit from difficulty. Making struggle 'productive' requires conditions not all students have.</li>
+                                <li>Difficulty and failure carry different meanings for different students. Those already doubting their belonging may interpret struggle as confirmation they don't belong, while others interpret it as normal learning. The same intervention can be empowering or threatening depending on the learner's position.</li>
+                                <li>Resist using 'productive failure' to justify inadequate support. Difficulty is productive in specific conditions; it's not a general justification for leaving students to struggle.</li>
+                            </ul>
                         </div>
                     </div>
-                </article>
+                </div>
+            </article>
 
-                <article class="theory-card">
-                    <h3>Argumentation</h3>
-                    <p class="tagline">Reasoning improves when claims require evidence and face challenge.</p>
-                    <div class="theory-detail">
-                        <section>
-                            <h4>Key Insight</h4>
-                            <p>Argumentation—constructing and critiquing arguments with claims, evidence, and reasoning—is both a learning outcome and a learning process. When learners must defend ideas and respond to counterarguments, they're forced to articulate reasoning, consider alternatives, and refine understanding.</p>
-                        </section>
-                        <section>
-                            <h4>In Practice</h4>
-                            <ul>
-                                <li>Claims are accepted without asking for evidence or reasoning</li>
-                                <li>Disagreement is avoided rather than explored productively</li>
-                                <li>Students state conclusions without showing how they got there</li>
-                            </ul>
-                        </section>
-                        <section>
-                            <h4>Design Implications</h4>
-                            <p>Create contexts where claims must be justified. Use structured controversy and debate. Teach argument structure explicitly. Value good reasoning even when conclusions are wrong.</p>
-                        </section>
-                        <div class="key-refs">
-                            <h4>Key References</h4>
-                            <p>Osborne et al. (2004); Kuhn (1991); Andriessen (2006)</p>
-                        </div>
-                    </div>
-                </article>
+            <!-- Cross-Bucket Connections -->
+            <div class="cross-bucket">
+                <h2>Cross-Bucket Connections</h2>
+                <ul>
+                    <li><strong>Inference and deep processing depend on knowledge organization (Bucket 1):</strong> you can only connect to and elaborate on what you know.</li>
+                    <li><strong>Deep processing requires attention and working memory resources (Bucket 2):</strong> inference is effortful and competes for limited capacity.</li>
+                    <li><strong>Productive difficulty only works when learners monitor and regulate their own processing (Bucket 4)</strong> and when affective conditions support persistence (Bucket 5).</li>
+                    <li><strong>Collaborative sensemaking (Bucket 6) can distribute the work of inference and explanation</strong>—but requires that ideas actually get taken up.</li>
+                </ul>
             </div>
         </section>
 
         <footer>
-            <div class="nav-buttons">
-                <a href="deep-dive-2.html" class="nav-btn secondary">← Previous: Attention & Working Memory</a>
-                <a href="deep-dive-4.html" class="nav-btn">Next: Monitoring & Feedback →</a>
-            </div>
+            <a href="deep-dive-2.html" class="nav-btn">← Previous: Attention & Working Memory</a>
+            <a href="deep-dive-4.html" class="nav-btn">Next: Monitoring & Self-Regulation →</a>
         </footer>
     </div>
 </body>
